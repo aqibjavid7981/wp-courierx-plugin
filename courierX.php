@@ -271,6 +271,7 @@ function courierx_bulk_action_handler( $redirect, $doaction, $object_ids )
                     $count++;
                     $itemDesc = '';
                     $itemQty = 0;
+                    $item_weight = 0;
 
                     //Get Order Info
                     $order = new WC_Order($orderId);
@@ -282,6 +283,7 @@ function courierx_bulk_action_handler( $redirect, $doaction, $object_ids )
                         $item_data = $item->get_data();
 
                         $itemQty += $item_data['quantity'];
+                        $item_weight += $item_data['weight'];
                         if($key != 0)
                         {
                             $itemDesc .= ", ";
@@ -423,7 +425,17 @@ function courierx_bulk_action_handler( $redirect, $doaction, $object_ids )
                                 <label for="item_quantity_<?= $count ?>">Item Quantity</label>
                             </th>
                             <td>
-                                <input style='width:60px' type="number" id="item_quantity_<?= $count ?>" name="order[<?= $count ?>][item_quantity]" value="<?= $itemQty ?>" required/>
+                                <input type="number" min="1" id="item_quantity_<?= $count ?>" name="order[<?= $count ?>][item_quantity]" value="<?= $itemQty ?>" required/>
+                            </td>
+                        </tr>
+                        <tr valign="middle">
+                            <th scope="row">
+                                <label for="item_weight_<?= $count ?>">Item Weight(Kg)</label>
+                            </th>
+                            <td>
+                                <input type="number" min="0" step="any" id="item_weight_<?= $count ?>" name="order[<?= $count ?>][item_weight]" value="<?= $item_weight ?>" required/>
+                                <input type="hidden"  id="courierx_username_<?= $count ?>" name="order[<?= $count ?>][courierx_username]" value="<?php echo get_option('courierx_username'); ?>"/>
+                                <input type="hidden"  id="courierx_shipper_city<?= $count ?>" name="order[<?= $count ?>][courierx_shipper_city]" value="<?php echo get_option('courierx_shipper_city'); ?>"/>
                             </td>
                         </tr>
                         <tr valign="middle">
@@ -555,21 +567,22 @@ function getServices(){
     return json_decode(get_request_api(SERVICES_API_REQUEST_URL),true);
 }
 function generateCN($dataArray){
-    $instructions = '';
-    if (!empty($dataArray['instructions'])){
-        $instructions = urlencode($dataArray['instructions']);
+
+
+    if (!empty($dataArray['special_instructions'])){
+        $instructions = urlencode($dataArray['special_instructions']);
     }
-    if (!empty($dataArray['customer_address'])){
-        $address = urlencode($dataArray['customer_address']);
-        $customer_name = urlencode($dataArray['customer_name']);
+    if (!empty($dataArray['consignee_address'])){
+        $address = urlencode($dataArray['consignee_address']);
+        $customer_name = urlencode($dataArray['consignee_name']);
     }
-    if(!empty($dataArray["product_details"])){
-        $product_details = urlencode($dataArray['product_details']);
+    if(!empty($dataArray["item_description"])){
+        $product_details = urlencode($dataArray['item_description']);
     }
     $url = SAVE_BOOKING_API.'?Clientcode='.$dataArray["shipper_code"].
         '&FromCityId='.$dataArray["shipper_city"].'&ToCityId='.$dataArray["destination_city"].
         '&ServiceTypeId='.$dataArray["service_type_id"].'&ConsigneeName='.$customer_name.
-        '&ConsigneeRef='.$dataArray["order_number"].'&ConsigneeAddress='.$address.
+        '&ConsigneeRef='.$dataArray["order_id"].'&ConsigneeAddress='.$address.
         '&ConsigneeMobile='.$dataArray["customer_phone"].'&Weight='.$dataArray["weight"].
         '&Pcs='.$dataArray["pieces"].'&CODAmount='.$dataArray["amount"].'&Remarks='.$instructions.
         '&ProductDetail='.$product_details;
