@@ -76,7 +76,7 @@ function courierx_value_function($column){
 
 add_action( 'manage_shop_order_posts_custom_column', 'courierx_value_function', 2 );
 
-function submit_form()
+function submit_form_courierx()
 {
     if (!empty($_POST['form_submitted']))
     {
@@ -99,7 +99,7 @@ function submit_form()
     }
 }
 
-add_action( 'init', 'submit_form' );
+add_action( 'init', 'submit_form_courierx' );
 
 //Trax plugin -- START
 
