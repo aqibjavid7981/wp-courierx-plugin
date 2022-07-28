@@ -83,7 +83,7 @@ if($_POST)
 
                 global $wpdb;
                 $wpdb->insert($wpdb->prefix."postmeta", array('post_id' => $order_id, 'meta_key' => 'booked_by', 'meta_value' => 'CourierX'));
-                $wpdb->insert($wpdb->prefix."postmeta", array('post_id' => $order_id, 'meta_key' => 'tracking_number', 'meta_value' => $response['response']));
+                $wpdb->insert($wpdb->prefix."postmeta", array('post_id' => $order_id, 'meta_key' => 'courierx_tracking_number', 'meta_value' => $response['response']));
 
                 $msgs .= "\r\n".$response['message'].' Tracking # '.$response['response'];
             }

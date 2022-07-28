@@ -62,8 +62,8 @@ function courierx_value_function($column){
         $tracking_link = '';
 
         foreach($result as $row) {
-            if($row->meta_key == 'tracking_number') {
-//                $tracking_link = '<a target="_blank" href="https://sonic.pk/tracking?tracking_number=' . $row->meta_value . '">Track Shipment: ' . $row->meta_value . '</a>';
+            if($row->meta_key == 'courierx_tracking_number') {
+//                $tracking_link = '<a target="_blank" href="https://sonic.pk/tracking?courierx_tracking_number=' . $row->meta_value . '">Track Shipment: ' . $row->meta_value . '</a>';
                                 $tracking_link = '<a  href="javascript:void(0);">CN'. $row->meta_value . '</a>';
             }
         }
@@ -399,7 +399,7 @@ function courierx_bulk_action_handler( $redirect, $doaction, $object_ids )
                             <td>
                                 <select id="shipping_mode_<?= $count ?>" name="order[<?= $count ?>][shipping_mode]">
                                     <?php foreach ($service_types as $service_type):?>
-                                        <option value="<?= $service_type['ServiceTypeId'];?>"><?= $service_type['ServiceTypeName'];?></option>
+                                        <option value="<?= $service_type['ServiceTypeId'];?>" <?= ($service_type['ServiceTypeId'] == 2) ? 'selected': ''?>><?= $service_type['ServiceTypeName'];?></option>
                                     <?php endforeach;?>
                                 </select>
                             </td>
