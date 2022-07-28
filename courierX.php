@@ -11,7 +11,7 @@ require_once(ABSPATH . 'wp-config.php');
 const CITY_API_REQUEST_URL = 'https://cod.courierx.pk/api/PortalAPI/GetCity';
 const SERVICES_API_REQUEST_URL = 'https://testcod.courierx.pk/api/PortalAPI/GetServiceTypes';
 const SAVE_BOOKING_API = 'https://testcod.courierx.pk/api/PortalAPI/SaveBooking';
-function register_shipment_arrival_order_status() {
+function register_shipment_arrival_order_status_courierx() {
     register_post_status( 'wc-courierx-booked', array(
         'label'                     => 'Booked at CourierX',
         'public'                    => true,
@@ -21,9 +21,9 @@ function register_shipment_arrival_order_status() {
         'label_count'               => _n_noop( 'Booked at CourierX <span class="count">(%s)</span>', 'Booked at CourierX <span class="count">(%s)</span>' )
     ) );
 }
-add_action( 'init', 'register_shipment_arrival_order_status' );
+add_action( 'init', 'register_shipment_arrival_order_status_courierx' );
 
-function add_awaiting_shipment_to_order_statuses( $order_statuses ) {
+function add_awaiting_shipment_to_order_statuses_courierx( $order_statuses ) {
     $new_order_statuses = array();
     foreach ( $order_statuses as $key => $status ) {
         $new_order_statuses[ $key ] = $status;
@@ -34,7 +34,7 @@ function add_awaiting_shipment_to_order_statuses( $order_statuses ) {
     return $new_order_statuses;
 }
 
-add_filter( 'wc_order_statuses', 'add_awaiting_shipment_to_order_statuses' );
+add_filter( 'wc_order_statuses', 'add_awaiting_shipment_to_order_statuses_courierx' );
 
 function courierX_function($columns){
     $new_columns = (is_array($columns)) ? $columns : array();
