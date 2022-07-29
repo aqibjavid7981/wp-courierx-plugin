@@ -9,8 +9,8 @@
 
 require_once(ABSPATH . 'wp-config.php');
 const CITY_API_REQUEST_URL = 'https://cod.courierx.pk/api/PortalAPI/GetCity';
-const SERVICES_API_REQUEST_URL = 'https://testcod.courierx.pk/api/PortalAPI/GetServiceTypes';
-const SAVE_BOOKING_API = 'https://testcod.courierx.pk/api/PortalAPI/SaveBooking';
+const SERVICES_API_REQUEST_URL = 'https://cod.courierx.pk/api/PortalAPI/GetServiceTypes';
+const SAVE_BOOKING_API = 'https://cod.courierx.pk/api/PortalAPI/SaveBooking';
 function register_shipment_arrival_order_status_courierx() {
     register_post_status( 'wc-courierx-booked', array(
         'label'                     => 'Booked at CourierX',
