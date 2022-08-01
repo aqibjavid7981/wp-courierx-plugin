@@ -2,7 +2,7 @@
 /**
  * Plugin Name: CourierX
  * Description: YOUR RELIABLE E-COMMERCE DELIVERY PARTNERS
- * Version: 1
+ * Version: 1.0
  * Author: Gigasol
  * Author URI: https://gigasol.com/
  **/

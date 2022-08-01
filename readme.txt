@@ -4,7 +4,7 @@ Donate link: https://www.courierx.pk/
 Tags: courierx, courier, shipping pakistan, courier pakistan, courier company pakistan, shipping pakistan, drop shipping
 Requires at least: 4.7
 Tested up to: 5.9
-Stable tag: 1
+Stable tag: 1.o
 Requires PHP: 7.0 or greater
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
