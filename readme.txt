@@ -1,5 +1,5 @@
 === CourierX ===
-Contributors: gigasol
+Contributors: CourierX
 Donate link: https://www.courierx.pk/
 Tags: courierx, courier, shipping pakistan, courier pakistan, courier company pakistan, shipping pakistan, drop shipping
 Requires at least: 4.7
